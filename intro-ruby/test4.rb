@@ -25,7 +25,7 @@ puts a_school.introduction_video_url       #introduction_video_urlメソッド�
 puts a_school.introduction_statement       #introduction_statementメソッド実行したのちputsで出力
 
 b_school = School.new                                         #インスタンス作成
-b_school.name = "B学校"                                       #name=メソッド実行
+b_school.name = "B学校"                                       #name=メソッド実行     ※（インスタンス.インスタンスメソッド　の形で呼び出している）
 b_school.address = "新宿区"                                   #address=メソッド実行
 b_school.number_of_students = "100"                            #a_school.number_of_student=メソッド実行
 b_school.founding_years = "200"                               #founding_years=メソッド実行
