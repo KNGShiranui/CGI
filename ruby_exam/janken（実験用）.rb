@@ -19,7 +19,8 @@ class Introduction
         puts "[0]:ああやるよ。やればいいんだろ？\n[1]:なんなんだおまえはあ～～～～～ッ！？ついてくるなあっち行けッ！"
         input_hand = STDIN.noecho(&:gets).chomp
       else                                      #else それ以外の場合  
-        false
+        puts "グーだァ！！（グーパンチ）ふざけてんじゃあないぞ！！"
+        return false
       end
       if dive < 5
         puts "いい加減にしろ。#{dive}回目だぞ！"
