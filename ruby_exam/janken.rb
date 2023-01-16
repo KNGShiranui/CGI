@@ -1,3 +1,4 @@
+require 'io/console'
 class Player
   def hand
     puts "数字を入力してください。"
