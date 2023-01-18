@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/contact.css">
+    <title>溝畑農園</title>
+  </head>
+  <body>
+    <div class="container">
+    <header class="header clearfix">
+      <a href="index.html">
+      <img src="./image/hokuto1.jpg" class="logo_image">
+      </a>
+      <nav>
+        <ul class="top_menu clearfix">
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="business.html">事業内容</a></li>
+          <li><a href="company.html">会社概要</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </header>
+    <img src="./image/fumou.jpg" class="image_area">
+   
+    <h1 class="hyahha-goya">ヒャッハー！！ゴーヤだゴーヤだー！！！</h1>
+    <% require 'pg' %>
+    <% connection = PG::connect(dbname: "goya") %>
+    <% connection.internal_encoding = "UTF-8" %>
+    <form action="indicate.cgi" method="POST">
+       下記に文字を入力してください<br><br>
+      <input type="text"  name="input" ><br>
+      <input type="submit" name="送信" >
+    </form>
+    <% result = connection.exec("select weight, give_for from crops;") %>
+    <% data = [] %>
+    <% result.each do |record| %>
+      <%  data << "ゴーヤの大きさ：#{record["weight"]}　売った相手：#{record["give_for"]}" %>
+    <% end %>
+    <form action="goya.cgi" method="POST">
+       下記のボタンを押すと、ゴーヤの大きさと売った相手の情報ページに飛びます<br><br>
+       <!-- valueには、送りたいデータを代入する -->
+       <!-- name="goya"を、情報の目印とする -->
+      <input type="text" name="goya" value="<%= data.join(' ') %>">
+      <input type="submit" name="送信" >
+    </form>
+    <div class="wrapper clearfix">
+      <aside class="side_menu">
+        <nav>
+          <ul>
+            <li><a href="business.html">事業内容</a></li>
+            <li><a href="company.html">会社概要</a></li>
+            <li class="point"><a href="contact.html">お問い合わせ</a></li>
+            <li><a href="https://twitter.com/nobrin19/status/1561623512850108421">試食会の様子</a></li>
+            <li><a href="https://www.youtube.com/watch?v=iuR1dwXVNQI">野菜を使ったおすすめレシピ</a></li>
+          </ul>
+          <img src="./image/head.jpg" class="image_area">
+        </nav>
+      </aside>
+
+      <article class="content">
+        <form action="">
+          <table class="contact">
+            <tr>
+              <th>お名前</th>
+              <td><input class="textbox" placeholder="ヤムチャ" type="text" name="name"></td>
+              </tr>
+              <tr>
+              <th>メールアドレス</th>
+              <td><input  class="textbox" type="text" placeholder="saibaiman-saibai@bomber.com" name="mail"></td>
+              </tr>
+              <tr class="gender">
+              <th>性別</th>
+              <td>
+                <input type="radio" name="gender" value="male">男
+                <input type="radio" name="gender" value="female">女
+                <input type="radio" name="gender" value="">男かつ女
+                <input type="radio" name="gender" value="">植物<br>
+                <input type="radio" name="gender" value="">その他（下記に詳細を記入してください）
+                <input class="textbox" placeholder="詳細を記入してください" type="text" name="name"></td>
+              </td>
+            </tr>
+            <tr class="ryuuha">
+              <th>極めたい分野</th>
+              <td>
+                <input type="radio" name="bunya" value="">ゴーヤ栽培
+                <input type="radio" name="bunya" value="">オレンジ栽培
+                <input type="radio" name="bunya" value="">サイバイマン栽培
+                <input type="radio" name="bunya" value="">その他（下記に詳細を記入してください）
+                <input class="textbox" placeholder="詳細を記入してください" type="text" name="name"></td>
+              </td>
+            </tr>    
+            <tr>
+              <th>出身地</th>
+              <td>
+                <select class="textbox" type="text" name="prefecture">
+                <option>東京都</option>
+                <option>界王星</option>
+                <option>ナメック星</option>
+                <option>死後の世界</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>居住地</th>
+              <td>
+                <input  class="textbox" type="text" placeholder="1年の半分以上は死後の世界" name="mail">
+              </td>
+            </tr>
+            <tr>
+              <th>趣味</th>
+              <td><input  class="textbox" type="text" placeholder="ドラゴンボールによる蘇生" name="mail"></td>
+            </tr>
+            <tr>
+              <th>お問い合わせ内容</th>
+              <td>
+                <textarea class="textbox" placeholder="サイバイマンが栽培中に自爆してきます。どのようにすれば自爆されずに育成できるでしょうか。" name="kanso" ></textarea>
+              </td>
+            </tr>
+          </table>
+
+          <div class="submit-button" onclick="audio()">
+            <input class="submit" type="submit" value="発射">
+            <audio id="submit-button_audio">
+              <source src="./audio/submit-button.mp3" type="audio/mp3">
+            </audio>
+          </div>            
+            <img src="./image/monku.png" class="image_background"> 
+        </form>
+      </article>
+    </div>
+  <footer class="footer">
+    <p><a href="https://www.youtube.com/watch?v=QVGfzhd2gjQ">キャベツ栽培についてはこちら</a></p>
+  </footer>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="button.js"></script>
+  </body>
+</html>
+
