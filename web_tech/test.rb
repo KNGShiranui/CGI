@@ -11,7 +11,7 @@ server = WEBrick::HTTPServer.new({
 }
 
 server.mount('/test', WEBrick::HTTPServlet::ERBHandler, 'test.html.erb')
-server.mount('/goya', WEBrick::HTTPServlet::ERBHandler, 'goya.html.erb')
+server.mount('/', WEBrick::HTTPServlet::ERBHandler, 'goya.html.erb')
 server.mount('/goyatest', WEBrick::HTTPServlet::ERBHandler, 'goyatest.html.erb')
 
 # この一行を追記
